@@ -1,0 +1,14 @@
+create table user_details(user_id varchar(20) primary key,pwd varchar(80),name varchar(80),email varchar(80),phone_no varchar(11));
+create table route(route_id int,dest varchar(80),source varchar(80),fare decimal(7,3), primary key(route_id,dest,source));
+create table bus(bus_id int primary key,tot_seats int,AC_type varchar(5),sleeper_type varchar(5));
+create table has(bus_id int,route_id int ,depart_date date,depart_time time,primary key(bus_id,route_id,depart_date,depart_time), foreign key(bus_id) references bus(bus_id),foreign key(route_id) references route(route_id));
+create table reserves(user_id varchar(20),bus_id int,route_id int,ticket_no int unique,depart_date date,depart_time time,credit_card_no varchar(80),primary key(user_id,route_id,bus_id,ticket_no),foreign key(bus_id,route_id) references has(bus_id,route_id),foreign key(user_id) references user_details(user_id));
+
+create table records (ticket_no int,seat_no int,name varchar(80),age int,sex varchar(5),personal_id varchar(80),source varchar(80),dest varchar(80),phone_no varchar(11),primary key(ticket_no,seat_no,personal_id));
+
+insert into bus values(710,100,"Yes","Yes"),(711,100,"No","No"),(712,100,"Yes","No"),(713,100,"No","Yes");
+insert into route values(111,"Silchar","Guwahati",125.00),(111,"Shillong","Guwahati",200.00),(111,"Meghalaya","Guwahati",400.00),(111,"Shillong","Silchar",100.00),(111,"Meghalaya","Silchar",350.00),(111,"Meghalaya","Shillong",300.00);
+insert into has values(710,111,"2016-03-10","04:00:00"),(711,111,"2016-03-11","08:00:00"),(712,111,"2016-03-10","14:00:00"),(713,111,"2016-03-13","16:00:00");
+
+
+select timestampdiff(hour,now(),(select concat(depart_date," ",depart_time) from has where bus_id = 712)) as time;

@@ -1,0 +1,32 @@
+body {
+    background-color: #b0c4de;
+}
+h1 {
+       color: red;
+ text-align: center;
+font-size: 50px;
+text-decoration: underline;
+}
+/* unvisited link */
+a:link {
+      
+    text-decoration: none;
+    font-size : 20px;
+}
+
+/* visited link */
+a:visited {
+    color: blue;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+p{
+color: blue;
+font-family: "Times New Roman", Times, serif;
+font-style: italic;
+font-size: 30px;
+}
+
